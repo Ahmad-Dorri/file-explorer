@@ -1,11 +1,11 @@
 import { Box } from '@mui/material';
 
-import HomePage from './pages/home/home-page';
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Navigation } from './components/navigation';
 import { useEffect } from 'react';
 import SubFolders from './pages/sub-folders/sub-folders';
+import HomePage from './pages/home/home-page';
 
 function App() {
   const navigate = useNavigate();

@@ -1,8 +1,23 @@
 import supabase from '../lib/config/supabase';
 import { FolderType } from '../lib/types/FolderType';
 
-export const getAllFolders = async () => {
-  let { data, error } = await supabase.from('folders').select('*');
+export const getAllFolders = async (parent: string) => {
+  let { data, error } = await supabase
+    .from('folders')
+    .select('*')
+    .eq('parent', parent);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data;
+};
+export const getAllFiles = async (parent: string) => {
+  let { data, error } = await supabase
+    .from('files')
+    .select('*')
+    .eq('parent', parent);
+
   if (error) {
     throw new Error(error.message);
   }

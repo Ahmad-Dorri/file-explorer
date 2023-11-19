@@ -10,10 +10,12 @@ import { useMutation } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
 import { insertFolder } from '../services/api-folders';
 import { toast } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { onOpen } from '../redux/slices/modal-slice';
 
 const SubNavigation = () => {
   const location = useLocation();
-
+  const dispatch = useDispatch();
   const { mutate: createFolder } = useMutation({
     mutationFn: insertFolder,
     onSuccess: () => {
@@ -50,19 +52,17 @@ const SubNavigation = () => {
               color: 'inherit',
               textDecoration: 'none',
             }}>
-            {/* //! change to the folder name */}
-
             {location.pathname}
           </Typography>
         </Toolbar>
         <Container sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <IconButton
             onClick={() =>
-              createFolder({
-                name: 'ahmad',
-                parent: 'ahmad',
-                path: 'root',
-              })
+              dispatch(
+                onOpen({
+                  type: 'CreateFolder',
+                })
+              )
             }
             aria-label="create a new folder"
             aria-controls="create-folder"
@@ -105,29 +105,6 @@ const SubNavigation = () => {
                 textDecoration: 'none',
               }}>
               Create file
-            </Typography>
-          </IconButton>
-
-          <IconButton
-            sx={{ display: 'flex', gap: 1 }}
-            size="large"
-            aria-label="delete a folder"
-            aria-controls="delete-folder"
-            aria-haspopup="true"
-            color="inherit">
-            <Delete />
-            <Typography
-              component="li"
-              variant="h6"
-              sx={{
-                display: 'flex',
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}>
-              delete folder
             </Typography>
           </IconButton>
         </Container>

@@ -4,3 +4,11 @@ export type FolderType = {
   name: string;
   id: string;
 };
+
+export type FileType = {
+  name: string;
+  parent: string;
+  id: string;
+  path: string;
+  extension: string;
+};

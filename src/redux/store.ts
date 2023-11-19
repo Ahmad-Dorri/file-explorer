@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterSlice from './slices/counter-slice';
+import modalSlice from './slices/modal-slice';
 
 export const store = configureStore({
   reducer: {
     counter: counterSlice,
+    modal: modalSlice,
   },
   devTools: true,
 });
