@@ -18,9 +18,9 @@ const ShowItems = ({ items }: ShowItemsProps) => {
           <Link
             // onClick={() => console.log(item)}
             className="border p-5"
-            to={item.path}
+            to={!item.extension && item.path}
             key={item.id}>
-            📁 {item.name}
+            {item.name}
           </Link>
         ))}
       </Stack>

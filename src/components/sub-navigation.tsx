@@ -16,15 +16,6 @@ import { onOpen } from '../redux/slices/modal-slice';
 const SubNavigation = () => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { mutate: createFolder } = useMutation({
-    mutationFn: insertFolder,
-    onSuccess: () => {
-      toast.success('folder added');
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
-  });
 
   return (
     <AppBar
@@ -86,6 +77,13 @@ const SubNavigation = () => {
           </IconButton>
 
           <IconButton
+            onClick={() => {
+              dispatch(
+                onOpen({
+                  type: 'CreateFile',
+                })
+              );
+            }}
             sx={{ display: 'flex', gap: 1 }}
             size="large"
             aria-label="create a new file"

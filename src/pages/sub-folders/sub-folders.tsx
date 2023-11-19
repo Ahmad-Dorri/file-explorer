@@ -1,22 +1,18 @@
 import { useLocation, useParams } from 'react-router-dom';
-import CreateFolderModal from '../../components/modals/create-folder-modal';
 import { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { getAllFiles, getAllFolders } from '../../services/api-folders';
 import { Box, Divider, Typography } from '@mui/material';
+
+import CreateFolderModal from '../../components/modals/create-folder-modal';
+import { getAllFiles, getAllFolders } from '../../services/api-folders';
 import ShowItems from '../../components/show-items/show-items';
+import CreateFileModal from '../../components/modals/create-file-modal';
 
 const SubFolders = () => {
   const params = useParams();
-  // console.log('🚀 ~ file: sub-folders.tsx:11 ~ SubFolders ~ params:', params);
-
   const location = useLocation();
 
   const [lastItem] = location.pathname.split('/').slice(-1);
-  console.log(
-    '🚀 ~ file: sub-folders.tsx:16 ~ SubFolders ~ lastItem:',
-    lastItem
-  );
 
   const [folders, setFolders] = useState([]);
   const [files, setFiles] = useState([]);
@@ -56,6 +52,7 @@ const SubFolders = () => {
       </Divider>
       <ShowItems items={files} />
       <CreateFolderModal parent={params.id!} path={location.pathname} />
+      <CreateFileModal parent={params.id!} path={location.pathname} />
     </Box>
   );
 };

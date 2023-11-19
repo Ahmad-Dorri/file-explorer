@@ -2,40 +2,41 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import ModalComponent from '../ui/modal';
 import { useMutation } from '@tanstack/react-query';
-import { insertFolder } from '../../services/api-folders';
+import { insertFile } from '../../services/api-folders';
 import { toast } from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
-interface CreateFolderModalProps {
+interface CreateFileModalProps {
   parent: string;
   path: string;
 }
 
-const CreateFolderModal = ({ parent }: CreateFolderModalProps) => {
+const CreateFileModal = ({ parent }: CreateFileModalProps) => {
   const [inputValue, setInputValue] = useState('');
   const modal = useSelector((state: RootState) => state.modal);
-  const isModalOpen = modal.isOpen && modal.type === 'CreateFolder';
-  const { mutate: createFolder } = useMutation({
-    mutationFn: insertFolder,
+  const isModalOpen = modal.isOpen && modal.type === 'CreateFile';
+  const { mutate: createFile } = useMutation({
+    mutationFn: insertFile,
     onSuccess: () => {
-      toast.success('folder created successfully.');
+      toast.success('file created successfully.');
     },
     onError: (error) => {
       toast.error(error.message);
     },
   });
-
+  const fileExtension = inputValue.split('.').pop();
   return (
     <ModalComponent isOpen={isModalOpen}>
       <Box
         component="form"
         onSubmit={(e) => {
           e.preventDefault();
-          createFolder({
+          createFile({
             name: inputValue,
             parent,
             path: inputValue,
+            extension: fileExtension,
           });
         }}
         sx={{
@@ -50,18 +51,18 @@ const CreateFolderModal = ({ parent }: CreateFolderModalProps) => {
           gap: 1,
           padding: 4,
         }}>
-        <Typography variant="h4">Create New Folder</Typography>
+        <Typography variant="h4">Create New File</Typography>
         <TextField
           onChange={(e) => setInputValue(e.target.value)}
-          label="Folder Name"
+          label="File Name"
           variant="outlined"
         />
         <Button variant="outlined" type="submit">
-          Create Folder
+          Create File
         </Button>
       </Box>
     </ModalComponent>
   );
 };
 
-export default CreateFolderModal;
+export default CreateFileModal;

@@ -5,6 +5,7 @@ import { getAllFiles, getAllFolders } from '../../services/api-folders';
 import CreateFolderModal from '../../components/modals/create-folder-modal';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import CreateFileModal from '../../components/modals/create-file-modal';
 
 const HomePage = () => {
   const location = useLocation();
@@ -46,6 +47,7 @@ const HomePage = () => {
       </Divider>
       <ShowItems items={files} />
       <CreateFolderModal parent="root" path="root" />
+      <CreateFileModal parent="root" path="root" />
     </Box>
   );
 };

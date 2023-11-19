@@ -32,7 +32,7 @@ function Navigation() {
               </IconButton>
             </Box>
             <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-            <Link to="/">
+            <Link to="/root">
               <Typography
                 variant="h6"
                 noWrap
@@ -54,7 +54,7 @@ function Navigation() {
               variant="h5"
               noWrap
               component="a"
-              href="/"
+              href="/root"
               sx={{
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },

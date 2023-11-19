@@ -1,18 +1,17 @@
 import { Modal } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { useDispatch } from 'react-redux';
 import { onClose } from '../../redux/slices/modal-slice';
 
 interface ModalComponentProps {
   children: React.ReactElement;
+  isOpen: boolean;
 }
 
-const ModalComponent = ({ children }: ModalComponentProps) => {
-  const modal = useSelector((state: RootState) => state.modal);
+const ModalComponent = ({ children, isOpen }: ModalComponentProps) => {
   const dispatch = useDispatch();
   return (
     <Modal
-      open={modal.isOpen}
+      open={isOpen}
       onClose={() => dispatch(onClose())}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description">
