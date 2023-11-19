@@ -16,6 +16,10 @@ const ShowItems = ({ items }: ShowItemsProps) => {
         {items.map((item) => (
           // todo: fix this
           <Link
+            onContextMenu={(e) => {
+              e.preventDefault();
+              console.log(item);
+            }}
             // onClick={() => console.log(item)}
             className="border p-5"
             to={!item.extension && item.path}
